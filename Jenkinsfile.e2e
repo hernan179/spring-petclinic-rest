@@ -1,0 +1,75 @@
+pipeline {
+    agent none
+    options {
+        timeout(time: 10, unit: 'MINUTES')
+        ansiColor('xterm')
+        // buildDiscarder(logRotator(numToKeepStr: '7'))
+    }
+    // triggers {
+    //     cron('H/15 * * * *')
+    // }
+    stages {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-17-alpine'
+                    // args '--quiet'
+                }
+            }
+            steps {
+                sh 'mvn -q clean package -Dstyle.color=always -DskipTests -B -ntp'
+            }
+        }
+        stage('Prepare environment') {
+            agent any
+            steps {
+                dir('frontend'){
+                    git branch: "master",
+                    url: "https://github.com/devops-mitocode/spring-petclinic-angular.git"
+                }
+                sh "docker compose -f docker-compose.e2e.yml --project-name ${BUILD_TAG} up -d --quiet-pull"
+                sh 'docker ps -a'
+            }
+        }        
+        stage('E2E Test') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-11-alpine'
+                    args "--network ${BUILD_TAG}_default -e EPHEMERAL=true"
+                }
+            }
+            options {
+                skipDefaultCheckout()
+            }
+            steps {
+                sh 'sleep 1m'
+                sh "curl http://backend:9966/petclinic/api/pettypes"
+
+                // sh 'sleep 3m'
+                sh "curl -I http://frontend:8080"
+
+                dir('acceptance-e2e'){
+                    git branch: 'master',
+                    url: 'https://github.com/devops-mitocode/acceptance-e2e.git'
+                }
+
+                sh 'ls -la'
+                // sh 'sleep 1m'
+
+                sh 'mvn clean verify -Dstyle.color=always -f acceptance-e2e/pom.xml -B -ntp'
+
+                cucumber '**/cucumber.json'
+            }
+        }
+        stage('Destroy environment') {
+            agent any
+            options {
+                skipDefaultCheckout()
+            }            
+            steps {
+                sh "docker compose --project-name ${BUILD_TAG} down --rmi all --volumes"
+                sh 'docker system prune -af'
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  backend:
+    build: .
+    depends_on:
+      - db
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/petclinic
+
+  db:
+    image: postgres:9.6.0
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=petclinic
+      - POSTGRES_DB=petclinic
