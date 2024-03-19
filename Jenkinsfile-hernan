@@ -39,7 +39,7 @@ pipeline {
             agent any
             steps  {
                 echo 'Quality sonar..';
-                withSonarQubeEnv('http://158.220.102.185:9000') {
+                withSonarQubeEnv('sonarqube') {
                   sh 'mvn clean package sonar:sonar'              
                }
                 // withSonarQubeEnv('http://158.220.102.185:9000') {
