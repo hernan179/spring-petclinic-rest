@@ -46,13 +46,14 @@ pipeline {
             steps {
                 echo 'actifactory...saving';
                  script {
-                    def pom = readMavenPom file: 'pom.xml'
+                    //def pom = readMavenPom file: 'pom.xml'
                     //println pom
                     
                     def server = Artifactory.server 'actifactory'
+                     echo 'actifactory...saving 1 ';
                     def repository = 'spring-petclinic-rest'
-                    
-                   echo 'result pom ${pom.groupId}'
+                     echo 'actifactory...saving 2 ';
+            
                      /*if("${GIT_BRANCH}" == 'origin/master'){
                         repository = repository + '-release'
                     } else {
@@ -64,7 +65,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": "${repository}/${pom.groupId}/${pom.artifactId}/${pom.version}/",
+                                    "target": "generate fule.war",
                                     "regexp": "true"
                                 }
                             ]
