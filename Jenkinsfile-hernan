@@ -20,8 +20,10 @@ pipeline {
             }
             post {
                 success {
+                     echo 'executeing jacoco....';
                     jacoco()
-                    junit 'target/surfire-reposts/*.xml'
+                     echo 'executeing junit....';
+                    junit 'target/surefire-reports/*.xml'
                 }
                 always {
                     echo 'Validation finished'
