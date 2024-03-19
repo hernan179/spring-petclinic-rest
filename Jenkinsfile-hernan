@@ -35,6 +35,7 @@ pipeline {
 
         }
         stage('Sonar'){
+            agent any
             steps  {
                 echo 'Quality sonar..';
                 withSonarQubeEnv('http://158.220.102.185:9000') {
