@@ -35,7 +35,7 @@ pipeline {
 
         }
         stage('Sonar'){
-            steps {
+            node  {
                 echo 'Quality sonar..';
                  withSonarQubeEnv('http://158.220.102.185:9000') {
                 sh 'mvn clean package sonar:sonar'
