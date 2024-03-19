@@ -35,11 +35,16 @@ pipeline {
 
         }
         stage('Sonar'){
-            node  {
+            steps  {
                 echo 'Quality sonar..';
                  withSonarQubeEnv('http://158.220.102.185:9000') {
                 sh 'mvn clean package sonar:sonar'
               }
+            }
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
             }
         }
         stage('Artifactory'){
