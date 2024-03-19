@@ -7,8 +7,8 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                //echo 'Checkout git project...';
-                git 'https://github.com/hernan179/spring-petclinic-rest.git'
+                echo 'Witout Checkout form jenkingsfile-hernan, implicited was done';
+                //git 'https://github.com/hernan179/spring-petclinic-rest.git'
                  sh 'mvn clean compile -B -ntp'
             }
         }
