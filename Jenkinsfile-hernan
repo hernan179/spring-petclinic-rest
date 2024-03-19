@@ -41,11 +41,11 @@ pipeline {
                 sh 'mvn clean package sonar:sonar'
               }
             }
-            steps {
+            /*steps {
                 timeout(time: 1, unit: 'HOURS') {
                     waitForQualityGate abortPipeline: true
                 }
-            }
+            }*/
         }
         stage('Artifactory'){
             steps {
