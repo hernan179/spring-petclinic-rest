@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build'){
+            steps {
+                echo 'Building';
+            }
+        }
+        stage('Testing'){
+            steps {
+                echo 'Testing';
+            }
+
+        }
+        stage('Sonar'){
+            steps {
+                echo 'Qualiting';
+            }
+        }
+        stage('Artifactory'){
+            steps {
+                echo 'Artifactory...saving';
+            }
+        }
+        stage('Deploy'){
+            steps {
+                echo 'Deploying... on jboss';
+            }
+        }
+    }
+}
