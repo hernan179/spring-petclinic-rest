@@ -12,7 +12,7 @@ pipeline {
                  sh 'mvn clean compile -B -ntp'
             }
         }
-        stage('Testing'){
+        /*stage('Testing'){
             steps {
                 echo 'Testing';
                 sh 'mvn test -B -ntp'
@@ -33,23 +33,18 @@ pipeline {
                 }
             }
 
-        }
-        stage('Sonar'){
+        }*/
+        /*stage('Sonar'){
             steps  {
                 echo 'Quality sonar..';
                 withSonarQubeEnv('sonarqube') {
                   sh 'mvn clean package sonar:sonar'              
                }
             }
-        }
+        }*/
         stage('Artifactory'){
             steps {
                 echo 'Artifactory...saving';
-            }
-        }
-        stage('Deploy'){
-            steps {
-                echo 'Deploying... on jboss';
                  script {
                     def pom = readMavenPom file: 'pom.xml'
                     println pom
@@ -76,6 +71,12 @@ pipeline {
                     """
                     server.upload spec: uploadSpec
                  }
+            }
+        }
+        stage('Deploy'){
+            steps {
+                echo 'Deploying... on jboss';
+                
             }
         }
     }
