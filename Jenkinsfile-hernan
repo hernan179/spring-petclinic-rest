@@ -40,15 +40,7 @@ pipeline {
                 withSonarQubeEnv('sonarqube') {
                   sh 'mvn clean package sonar:sonar'              
                }
-                // withSonarQubeEnv('http://158.220.102.185:9000') {
-                //sh 'mvn clean package sonar:sonar'
-            //  }
             }
-            /*steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    waitForQualityGate abortPipeline: true
-                }
-            }*/
         }
         stage('Artifactory'){
             steps {
@@ -58,6 +50,32 @@ pipeline {
         stage('Deploy'){
             steps {
                 echo 'Deploying... on jboss';
+                 script {
+                    def pom = readMavenPom file: 'pom.xml'
+                    println pom
+                    
+                    def server = Artifactory.server 'artifactory'
+                    def repository = 'spring-petclinic-rest'
+                    
+                     if("${GIT_BRANCH}" == 'origin/master'){
+                        repository = repository + '-release'
+                    } else {
+                        repository = repository + '-snapshot'
+                    }
+
+                    def uploadSpec = """
+                        {
+                            "files": [
+                                {
+                                    "pattern": "target/.*.jar",
+                                    "target": "${repository}/${pom.groupId}/${pom.artifactId}/${pom.version}/",
+                                    "regexp": "true"
+                                }
+                            ]
+                        }
+                    """
+                    server.upload spec: uploadSpec
+                 }
             }
         }
     }
