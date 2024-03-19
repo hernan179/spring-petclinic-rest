@@ -36,7 +36,6 @@ pipeline {
 
         }
         stage('Sonar'){
-            agent any
             steps  {
                 echo 'Quality sonar..';
                 withSonarQubeEnv('sonarqube') {
