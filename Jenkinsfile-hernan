@@ -7,14 +7,16 @@ pipeline {
     stages {
         stage('Build'){
             steps {
-                echo 'Checkout git project...';
+                //echo 'Checkout git project...';
                 git 'https://github.com/hernan179/spring-petclinic-rest.git'
-                 sh 'mvn install -DskipTests -B -ntp'
+                 sh 'mvn clean compile -B -ntp'
             }
         }
         stage('Testing'){
             steps {
                 echo 'Testing';
+                sh 'mvn test -B -ntp'
+                
             }
 
         }
