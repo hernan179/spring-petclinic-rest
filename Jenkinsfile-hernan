@@ -42,21 +42,22 @@ pipeline {
                }
             }
         }*/
-        stage('Artifactory'){
+        stage('actifactory'){
             steps {
-                echo 'Artifactory...saving';
+                echo 'actifactory...saving';
                  script {
                     def pom = readMavenPom file: 'pom.xml'
-                    println pom
+                    //println pom
                     
-                    def server = Artifactory.server 'Artifactory'
+                    def server = Artifactory.server 'actifactory'
                     def repository = 'spring-petclinic-rest'
                     
-                     if("${GIT_BRANCH}" == 'origin/master'){
+                   echo 'result pom ${pom.groupId}'
+                     /*if("${GIT_BRANCH}" == 'origin/master'){
                         repository = repository + '-release'
                     } else {
                         repository = repository + '-snapshot'
-                    }
+                    }*/
 
                     def uploadSpec = """
                         {
