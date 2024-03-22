@@ -50,7 +50,7 @@ pipeline {
                     //def pom = readMavenPom file: 'pom.xml'
                     //println pom
                     
-                    def server = Artifactory.server 'artifactory-1'
+                    def server = Artifactory.server 'artifactory-test'
                      echo 'actifactory...saving 1 ';
                     def repository = 'spring-petclinic-rest'
                      echo 'actifactory...saving 2 ';
