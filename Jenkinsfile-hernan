@@ -44,7 +44,7 @@ pipeline {
         }*/
         stage('actifactory'){
             steps {
-                echo 'actifactory...saving';
+                echo 'actifactory uploading...';
                  script {
                     //def pom = readMavenPom file: 'pom.xml'
                     //println pom
