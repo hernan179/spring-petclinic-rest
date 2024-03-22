@@ -2,6 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'maven3.8.8'
+        jfrog 'artifactory-1'
     }
 
     stages {
@@ -49,7 +50,7 @@ pipeline {
                     //def pom = readMavenPom file: 'pom.xml'
                     //println pom
                     
-                    def server = Artifactory.server 'artifactory'
+                    def server = Artifactory.server 'artifactory-1'
                      echo 'actifactory...saving 1 ';
                     def repository = 'spring-petclinic-rest'
                      echo 'actifactory...saving 2 ';
