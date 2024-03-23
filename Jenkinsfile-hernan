@@ -45,22 +45,11 @@ pipeline {
         }*/
         stage('actifactory'){
             steps {
-                echo 'actifactory uploading...';
                  script {
-                    //def pom = readMavenPom file: 'pom.xml'
-                    //println pom
-                    
+                     echo 'actifactory...saving';
                     def server = Artifactory.server 'artifactory-test'
-                     echo 'actifactory...saving 1 ';
                     def repository = 'spring-petclinic-rest'
-                     echo 'actifactory...saving 2 ';
-            
-                     /*if("${GIT_BRANCH}" == 'origin/master'){
-                        repository = repository + '-release'
-                    } else {
-                        repository = repository + '-snapshot'
-                    }*/
-
+                     echo 'actifactory...using instance '+server;
                     def uploadSpec = """
                         {
                             "files": [
