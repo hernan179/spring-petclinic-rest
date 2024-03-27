@@ -47,30 +47,33 @@ pipeline {
             steps {
                  script {
                      echo 'actifactory...saving';
-                     sh 'env | sort'
-                    def pom = readMavenPom file: 'pom.xml'
-                    println pom
+                    
+                    //sh 'env | sort'
+                    //def pom = readMavenPom file: 'pom.xml'
+                    //println pom
 
                     def server = Artifactory.server 'artifactory-test'
                     def repository = 'spring-petclinic-rest'
                     
                     echo 'Deploy to '+server; 
 
-                     if("${GIT_BRANCH}" == 'origin/master'){
+                    SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
+                    echo 'Deploy in  '+SOURCE_HASH; 
+
+                    /*if("${GIT_BRANCH}" == 'origin/master'){
                         repository = repository + '-release'
                     } else {
                         repository = repository + '-snapshot'
-                    }
-                    echo 'Deploy into '+ repository
+                    }*/
 
-                    def fullname = "${repository}/${pom.groupId}/${pom.artifactId}/${pom.version}/"
+                   // def fullname = "${repository}/${pom.groupId}/${pom.artifactId}/${pom.version}/"
                      
                     def uploadSpec = """
                         {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": "${fullname}",
+                                    "target": "spring-petclinic-rest",
                                     "regexp": "true"
                                 }
                             ]
