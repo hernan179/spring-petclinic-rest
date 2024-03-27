@@ -70,20 +70,16 @@ pipeline {
 
 
                     if(branch_nem == 'master' || branch_nem == 'origin' || branch_nem == 'main'){
-                        repository = repository + '-release'
-                    } else {
-                        repository = repository + '-snapshot'
-                    }
+                        repository = repository + '-prod'
+                    } 
                     
                     echo 'brach principal..' + repository
-                   // def fullname = "${repository}/${pom.groupId}/${pom.artifactId}/${pom.version}/"
-                     
                     def uploadSpec = """
                         {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": "spring-petclinic-rest",
+                                    "target": repository,
                                     "regexp": "true"
                                 }
                             ]
