@@ -6,7 +6,7 @@
 
 	<groupId>org.springframework.samples</groupId>
 	<artifactId>spring-petclinic-rest-final</artifactId>
-	<version>3.3.7</version>
+	<version>3.3.8</version>
 
 	<description>REST version of the Spring Petclinic sample application</description>
 	<url>https://spring-petclinic.github.io/</url>
