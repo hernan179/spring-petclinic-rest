@@ -60,6 +60,13 @@ pipeline {
                     SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
                     echo 'Deploy in  '+SOURCE_HASH; 
 
+                    def branch_nem = scm.branches[0].name
+                    if (branch_nem.contains("*/")) {
+                        branch_nem = branch_nem.split("\\*/")[1]
+                        }
+                    echo "branch..........................."+branch_nem
+
+
                    echo 'Pulling...' + env.BRANCH_NAME
 
 
