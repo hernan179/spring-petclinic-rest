@@ -68,7 +68,7 @@ pipeline {
                     echo "branch..........................."+branch_nem
 
 
-                    if(branch_nem == 'master' || branch_nem == 'origin' branch_nem == 'main'){
+                    if(branch_nem == 'master' || branch_nem == 'origin' || branch_nem == 'main'){
                         repository = repository + '-release'
                     } else {
                         repository = repository + '-snapshot'
