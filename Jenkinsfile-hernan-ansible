@@ -15,6 +15,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
+            echo 'executing ansible command...'
               ansiblePlaybook( 
                 playbook: '/etc/ansible/playbooks.yam',
                 inventory: '/etc/ansible/hosts', 
