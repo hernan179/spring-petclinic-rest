@@ -79,7 +79,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": repository,
+                                    "target": ${repository},
                                     "regexp": "true"
                                 }
                             ]
