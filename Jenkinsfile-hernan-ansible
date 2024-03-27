@@ -16,7 +16,7 @@ pipeline {
         stage('Deploy'){
             steps {
             echo 'executing ansible command...'
-            - name: get war to jboss
+            - name:
                get_url:
                  url: "http://158.220.102.185:8082/artifactory/spring-petclinic-rest-prod/spring-petclinic-rest-final-3.3.8.war"
                  dest: "/opt/compilados/"
