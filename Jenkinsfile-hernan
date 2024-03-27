@@ -55,7 +55,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": "generate_fule.war",
+                                    "target": "spring-petclinic-rest.war",
                                     "regexp": "true"
                                 }
                             ]
