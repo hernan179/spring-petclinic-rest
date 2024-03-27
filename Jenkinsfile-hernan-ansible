@@ -16,10 +16,13 @@ pipeline {
         stage('Deploy'){
             steps {
             echo 'executing ansible command...'
-              ansiblePlaybook( 
+               sh 'cat /etc/os-release'
+                sh 'whoami'
+                sh 'ansible --version'
+              /*ansiblePlaybook( 
                 playbook: '/etc/ansible/playbooks.yam',
                 inventory: '/etc/ansible/hosts', 
-                colorized: true) 
+                colorized: true) */
                 
             }
         }
