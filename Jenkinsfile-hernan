@@ -54,7 +54,7 @@ pipeline {
                         {
                             "files": [
                                 {
-                                    "pattern": "target/*.war",
+                                    "pattern": "target/.*.war",
                                     "target": "spring-petclinic-rest",
                                     "regexp": "true"
                                 }
