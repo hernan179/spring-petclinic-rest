@@ -16,12 +16,11 @@ pipeline {
         stage('Deploy'){
             steps {
             echo 'executing ansible command...'
-            - name: "get war to jboss"
-              get_url:
-                url: "http://158.220.102.185:8082/artifactory/spring-petclinic-rest-prod/spring-petclinic-rest-final-3.3.8.war"
-                dest: "/opt/compilados/"
-            
-            - name: "deploy..."
+              -name: "get war to jboss"
+               get_url:
+                 url: "http://158.220.102.185:8082/artifactory/spring-petclinic-rest-prod/spring-petclinic-rest-final-3.3.8.war"
+                 dest: "/opt/compilados/"
+              -name: "deploy..."
             vars:
               sh '/opt/jboss/jboss-eap-7.3/bin/jboss-cli.sh --connect --controller=localhost:9990'
               //appname: "spring-petclinic-rest-final-3.3.8.war"
