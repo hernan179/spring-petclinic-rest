@@ -47,15 +47,24 @@ pipeline {
             steps {
                  script {
                      echo 'actifactory...saving';
+                    def pom = readMavenPom file: 'pom.xml'
+                    println pom
+
                     def server = Artifactory.server 'artifactory-test'
                     def repository = 'spring-petclinic-rest'
                      echo 'actifactory...using instance '+server;
+
+                     if("${GIT_BRANCH}" == 'origin/master'){
+                        repository = repository + '-release'
+                    } else {
+                        repository = repository + '-snapshot'
+                    }
                     def uploadSpec = """
                         {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": "spring-petclinic-rest",
+                                    "target": "${repository}/${pom.groupId}/${pom.artifactId}/${pom.version}/",
                                     "regexp": "true"
                                 }
                             ]
