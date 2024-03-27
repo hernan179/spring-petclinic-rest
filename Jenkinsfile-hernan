@@ -60,15 +60,15 @@ pipeline {
                     SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
                     echo 'Deploy in  '+SOURCE_HASH; 
 
-                    git_branch_local=$(echo $GIT_BRANCH   | sed -e "s|origin/||g")
-                    GIT_BRANCH_LOCAL = sh (
+                    git_branch_local = $(echo $GIT_BRANCH   | sed -e "s|origin/||g")
+                    /*GIT_BRANCH_LOCAL = sh (
                         script: "echo $Branch | sed -e 's|origin/||g'",
                                  returnStdout: true
-                           ).trim()
-                        echo "Git branch: ${GIT_BRANCH_LOCAL}"
+                           ).trim()*/
+                        echo "Git branch git_branch_local : "+git_branch_local
 
 
-                    if("${GIT_BRANCH}" == 'origin/master'){
+                    if(git_branch_local == 'origin/master'){
                         repository = repository + '-release'
                     } else {
                         repository = repository + '-snapshot'
