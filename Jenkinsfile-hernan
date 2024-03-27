@@ -48,15 +48,16 @@ pipeline {
                  script {
                      echo 'actifactory...saving';
                     
-                    sh 'env | sort'
-                    def pom = readMavenPom file: 'pom.xml'
-                    println pom
-                    echo "Reading pom.xml"
-
                     def server = Artifactory.server 'artifactory-test'
                     def repository = 'spring-petclinic-rest'
                     
                     echo 'Deploy to '+server; 
+
+                    def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                    def artifactId = sh script: 'mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout', returnStdout: true
+                
+                    echo 'version of '+version
+                    echo 'artifactId '+artifactId 
 
                     SOURCE_HASH=sh ( script: 'git rev-parse HEAD | cut -c1-6',returnStdout: true ).trim()
                     echo 'Deploy in  '+SOURCE_HASH; 
