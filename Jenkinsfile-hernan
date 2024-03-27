@@ -55,7 +55,7 @@ pipeline {
                             "files": [
                                 {
                                     "pattern": "target/.*.war",
-                                    "target": "generate fule.war",
+                                    "target": "generate_fule.war",
                                     "regexp": "true"
                                 }
                             ]
