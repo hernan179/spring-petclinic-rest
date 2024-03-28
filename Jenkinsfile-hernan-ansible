@@ -12,11 +12,10 @@ pipeline {
                 //git 'https://github.com/hernan179/spring-petclinic-rest.git'
                 sh 'mvn clean install -DskipTests -B -ntp'
                 echo '======================= ansible local ==============='
-                sh 'ansible --version'
             }
         }
         stage('Deploy'){
-            agent {
+            /*agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
                     args '-u root'
@@ -24,9 +23,9 @@ pipeline {
             }
             environment {
                 ANSIBLE_HOST_KEY_CHECKING = "False"
-            }
+            }*/
             steps {
-             echo '======================= ansible Docker ==============='
+              echo '======================= ansible Docker ==============='
               sh 'ansible --version'
               sh 'env | sort'
 
