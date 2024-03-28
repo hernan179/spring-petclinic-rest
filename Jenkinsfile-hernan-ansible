@@ -28,7 +28,7 @@ pipeline {
              sh 'ansible --version'
              sh 'env | sort'
 
-             sshagent (credentials: ['centos-private-key']) {
+             sshagent (credentials: ['centos-private-key2']) {
 
              // sh 'ansible-playbook -i hosts jboss_install.yml'
 
