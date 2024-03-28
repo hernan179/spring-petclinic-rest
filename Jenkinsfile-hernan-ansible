@@ -15,7 +15,7 @@ pipeline {
             }
         }
         stage('Deploy'){
-            /*agent {
+            agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
                     args '-u root'
@@ -23,11 +23,11 @@ pipeline {
             }
             environment {
                 ANSIBLE_HOST_KEY_CHECKING = "False"
-            }*/
+            }
             steps {
               echo '======================= ansible Docker ==============='
-             //hsa sh 'ansible --version'
-              //hsa sh 'env | sort'
+             sh 'ansible --version'
+             sh 'env | sort'
 
             //ssh "jboss-eap-7.4/bin/jboss-cli.sh --user=$JBOSS_CREDENTIALS_USR --password=$JBOSS_CREDENTIALS_PSW -c --command='undeploy applicationPetstore.war'"
             //sh 'cp -a /root/.jenkins/workspace/spring-petclinic-rest-final/target/spring-pet*.war /opt/jboss/jboss-eap-7.3/standalone/deployments/'
