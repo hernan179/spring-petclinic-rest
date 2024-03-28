@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent noanyne
     tools {
         maven 'maven3.8.8'
         //jfrog 'artifactory-test'
@@ -14,6 +14,7 @@ pipeline {
             }
         }
         stage('Deploy'){
+            agent none
             agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
