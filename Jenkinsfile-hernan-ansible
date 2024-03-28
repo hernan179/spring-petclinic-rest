@@ -14,7 +14,7 @@ pipeline {
             }
         }
         stage('Deploy'){
-            agent none
+            agent label
             agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
