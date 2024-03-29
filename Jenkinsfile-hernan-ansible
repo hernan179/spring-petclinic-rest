@@ -33,7 +33,7 @@ pipeline {
              //sh 'ssh -v -o StrictHostKeyChecking=no 18.222.119.114 uname -a'
              sh 'ansible-inventory -i hosts --list -y'
              echo 'Execute command on ubutu instal jboss'
-             sh 'ansible-playbook -i "/opt/compilados/centos-private-key.pem" jboss_install.yml'
+             sh 'ansible-playbook -i hosts jboss_install.yml'
 
              
 
