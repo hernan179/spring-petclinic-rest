@@ -32,8 +32,9 @@ pipeline {
                  credentials: ['centos-private-key']
                 ){
 
-             echo 'Execute command on ubutu instal jboss'
+             echo 'step one Execute command on ubutu instal jboss'
              sh 'ansible-inventory -i hosts --list -y'
+              echo 'step two Execute command on ubutu instal jboss'
              sh 'ansible-playbook -i hosts jboss_install.yml'
 
              
