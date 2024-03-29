@@ -31,7 +31,8 @@ pipeline {
              sshagent (credentials: ['centos-private-key']) {
 
              //sh 'ssh -v -o StrictHostKeyChecking=no 18.222.119.114 uname -a'
-              sh 'ansible-playbook jboss_install.yml'
+             sh 'ansible-inventory -i hosts --list -y'
+              sh 'ansible-playbook jboss_install.yml --ask-pass'
 
              
 
