@@ -29,7 +29,7 @@ pipeline {
              sh 'env | sort'
 
              sshagent (
-                 credentials: ['centos-private-key']
+                 credentials: ['aws-centos-user-pass']
                 ){
 
              echo 'step one Execute command on ubutu instal jboss'
