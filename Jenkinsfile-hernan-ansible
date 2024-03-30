@@ -15,16 +15,16 @@ pipeline {
             }
         }*/
         stage('Deploy'){
-            agent {
+            /*agent {
                 docker {
                     image 'quay.io/ansible/ansible-runner:stable-2.12-latest'
                     args '-u root'
                 }
-            }
+            }*/
           
             steps {
 
-             echo '======================= ansible Docker ==============='
+             echo '======================= ansible Docker aws ==============='
              sh 'ansible --version'
              sh 'env | sort'
 
