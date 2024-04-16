@@ -20,7 +20,7 @@ pipeline {
                 sh 'mvn test -B -ntp'
             }
             post{
-                soccess{
+                success{
                     echo 'executing jacoco..'
                     jacoco()
                     echo 'excuting JUnit...'
