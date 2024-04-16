@@ -8,6 +8,7 @@
 	<artifactId>spring-petclinic-rest-final</artifactId>
 	<version>3.3.9</version>
 
+
 	<description>REST version of the Spring Petclinic sample application</description>
 	<url>https://spring-petclinic.github.io/</url>
 
@@ -18,7 +19,8 @@
 		<relativePath /> <!-- lookup parent from Maven repository -->
 	</parent>
 
-	<packaging>war</packaging>
+    <packaging>war</packaging>
+
 
 	<properties>
 		<!-- Third-party libraries -->
@@ -37,6 +39,7 @@
 		<docker.jib-maven-plugin.version>3.4.0</docker.jib-maven-plugin.version>
 		<docker.image.prefix>springcommunity</docker.image.prefix>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+            <java.version>8</java.version>
 	</properties>
 
 	<dependencies>
@@ -87,6 +90,15 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+
+           <!-- INI Para despliegue -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- FIN Para despliegue -->
 
 		<dependency>
 			<groupId>org.springframework.data</groupId>

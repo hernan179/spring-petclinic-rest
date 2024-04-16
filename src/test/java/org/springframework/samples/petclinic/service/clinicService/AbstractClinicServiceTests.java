@@ -486,6 +486,9 @@ abstract class AbstractClinicServiceTests {
         specialty3.setName("dentistry");
         specialty3.setId(3);
         List<Specialty> expectedSpecialties = List.of(specialty1, specialty2, specialty3);
+        
+       
+        
         Set<String> specialtyNames = expectedSpecialties.stream()
             .map(Specialty::getName)
             .collect(Collectors.toSet());
