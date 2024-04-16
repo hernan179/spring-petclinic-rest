@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.service.clinicService;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.*;
@@ -24,6 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -485,10 +487,19 @@ abstract class AbstractClinicServiceTests {
         Specialty specialty3 = new Specialty();
         specialty3.setName("dentistry");
         specialty3.setId(3);
-        List<Specialty> expectedSpecialties = List.of(specialty1, specialty2, specialty3);
-        
-       
-        
+
+        List<Specialty> expectedSpecialties = new ArrayList<>();
+        expectedSpecialties.add(specialty1);
+        expectedSpecialties.add(specialty2);
+        expectedSpecialties.add(specialty3);
+
+
+
+
+       // List<Specialty> expectedSpecialties = List.of(specialty1, specialty2, specialty3);//hsa
+
+
+
         Set<String> specialtyNames = expectedSpecialties.stream()
             .map(Specialty::getName)
             .collect(Collectors.toSet());
